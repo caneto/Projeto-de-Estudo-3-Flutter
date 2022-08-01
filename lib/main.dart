@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: Home()));
+  runApp(MaterialApp(
+    home: Home(),
+  ));
 }
 
 class Home extends StatefulWidget {
@@ -69,38 +71,13 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(
+              const Icon(
                 Icons.person_outlined,
                 size: 120.0,
                 color: Colors.green,
               ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    labelText: "Pesso em (Kg)",
-                    labelStyle: TextStyle(color: Colors.green)),
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green, fontSize: 25.0),
-                controller: weightController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Insira seu Peso";
-                  }
-                },
-              ),
-              TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: "Altura em (cm)",
-                      labelStyle: TextStyle(color: Colors.green)),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.green, fontSize: 25.0),
-                  controller: heightController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Insira sua Altura";
-                    }
-                  }),
+              buildTextFormField("Pesso em (Kg)","Insira seu Peso", weightController),
+              buildTextFormField("Altura em (cm)","Insira sua Altura", heightController),
               Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Container(
@@ -131,3 +108,21 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+Widget buildTextFormField(String label, String label2, TextEditingController controller){
+  return TextFormField(
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.green)),
+    textAlign: TextAlign.center,
+    style: TextStyle(color: Colors.green, fontSize: 25.0),
+    controller: controller,
+    validator: (value) {
+      if (value!.isEmpty) {
+        return label2;
+      }
+    },
+  );
+}
+
